@@ -22,19 +22,19 @@ function replace_in_file() {
 }
 
 function get_env_value() {
-    echo $(grep $1 laravel/.env | cut -d '=' -f2)
+    echo $(grep $1 laravel/.env.example | cut -d '=' -f2)
 }
 
 function set_env_value() {
-    sed -i "s/^$1=.*$/$1=$2/" "laravel/.env"
+    sed -i "s/^$1=.*$/$1=$2/" "laravel/.env.example"
 }
 
 function uncomment_line() {
-    sed -i "s/^#.*$1/$1/" "laravel/.env"
+    sed -i "s/^#.*$1/$1/" "laravel/.env.example"
 }
 
 function comment_line() {
-    sed -i "s/^$1/# $1/" "laravel/.env"
+    sed -i "s/^$1/# $1/" "laravel/.env.example"
 }
 
 # ----------------------------------------------------------------------------------------------------------------------

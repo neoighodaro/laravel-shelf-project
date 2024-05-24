@@ -15,8 +15,9 @@ The project contains a Docker image that you can use to run your Laravel project
 3. Click on the `Run workflow` button and fill in the form questions regarding your project
 4. Wait for the workflow to finish
 5. Clone your repository
+6. Copy the env file from the `.env.example` file to the `.env` file
 6. Run `docker-compose up -d` to start the Docker container
-7. Open your project in VSCode and start coding
+7. Open your project in VSCode
 
 ##  Production
 
