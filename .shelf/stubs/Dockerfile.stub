@@ -24,7 +24,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     ROOT=/var/www/html \
     COMPOSER_FUND=0 \
     COMPOSER_MAX_PARALLEL_HTTP=24 \
-    XDG_CONFIG_HOME=/var/www/html/storage/framework/psysh
+    XDG_CONFIG_HOME=/var/www/html/storage/app/psysh
 
 WORKDIR ${ROOT}
 
