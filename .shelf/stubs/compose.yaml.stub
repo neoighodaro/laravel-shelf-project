@@ -37,6 +37,7 @@ services:
       APP_ENV: "${APP_ENV:-local}"
       WITH_HORIZON: "true"
       WITH_SCHEDULER: "true"
+      COMPOSE_PROJECT_NAME: "[%SLUGIFIED_PROJECT_NAME%]"
     ports:
       - "${APP_PORT:-8080}:80"
     volumes:

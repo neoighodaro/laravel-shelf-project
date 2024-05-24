@@ -1,6 +1,6 @@
 {
     "name": "[%SLUGIFIED_PROJECT_NAME%]",
-    "dockerComposeFile": ["../compose.yaml"],
+    "dockerComposeFile": ["compose.yaml"],
     "service": "app",
     "remoteUser": "octane",
     "workspaceFolder": "/var/www/html",
