@@ -18,7 +18,7 @@ FORWARD_REDIS_PORT=${FORWARD_REDIS_PORT:-6379}
 # ----------------------------------------------------------------------------------------------------------------------
 
 function replace_in_file() {
-    sed -i "" "s/$1/$2/g" $3
+    sed -i "s/$1/$2/g" $3
 }
 
 function get_env_value() {
@@ -26,15 +26,15 @@ function get_env_value() {
 }
 
 function set_env_value() {
-    sed -i "" "s/^$1=.*$/$1=$2/" "laravel/.env"
+    sed -i "s/^$1=.*$/$1=$2/" "laravel/.env"
 }
 
 function uncomment_line() {
-    sed -i "" "s/^#.*$1/$1/" "laravel/.env"
+    sed -i "s/^#.*$1/$1/" "laravel/.env"
 }
 
 function comment_line() {
-    sed -i "" "s/^$1/# $1/" "laravel/.env"
+    sed -i "s/^$1/# $1/" "laravel/.env"
 }
 
 # ----------------------------------------------------------------------------------------------------------------------

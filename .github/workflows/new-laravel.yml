@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
 
       # Detect Laravel
-      - name: Detect Laravel
+      - name: Detect Laravel Setup
         id: laravel
         run: |
           if [ -f "composer.json" ]; then
@@ -39,7 +39,7 @@ jobs:
           fi
 
       # If Laravel is not detected, exit action
-      - name: Exit if not Laravel
+      - name: Exit If Already Setup
         if: steps.laravel.outputs.laravel == 'true'
         run: |
           echo "This action only works when the repository does not contain a composer.json file."
