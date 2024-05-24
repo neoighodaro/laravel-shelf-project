@@ -54,11 +54,11 @@ fi;
 cp .shelf/stubs/Dockerfile.stub docker/Dockerfile
 replace_in_file "\[\%FRANKENPHP_VERSION\%\]" "$FRANKENPHP_VERSION" docker/Dockerfile
 
-if [ -f ".devcontainer/devcontainer.json" ]; then
-    rm .devcontainer/devcontainer.json
+if [ -f ".devcontainer.json" ]; then
+    rm .devcontainer.json
 fi;
-cp .shelf/stubs/devcontainer.json.stub .devcontainer/devcontainer.json
-replace_in_file "\[\%SLUGIFIED_PROJECT_NAME\%\]" "$SLUGIFIED_PROJECT_NAME" .devcontainer/devcontainer.json
+cp .shelf/stubs/devcontainer.json.stub .devcontainer.json
+replace_in_file "\[\%SLUGIFIED_PROJECT_NAME\%\]" "$SLUGIFIED_PROJECT_NAME" .devcontainer.json
 
 ################################
 # Add Laravel project
@@ -73,6 +73,7 @@ composer create-project --prefer-dist laravel/laravel laravel --no-progress --no
 cd laravel
 composer require ext-gd ext-intl ext-mbstring ext-pdo_pgsql ext-pdo_sqlite ext-redis ext-zend-opcache
 composer require --dev friendsofphp/php-cs-fixer
+composer remove --dev laravel/sail
 cd ..
 
 if [ -f "compose.yaml" ]; then

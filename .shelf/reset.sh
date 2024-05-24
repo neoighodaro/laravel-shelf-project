@@ -3,7 +3,7 @@
 TARGET_DIR=$(dirname "$0")/../
 
 # Files and directories to keep (space-separated list)
-KEEP=(".git" ".devcontainer" ".github" ".shelf" "docker" ".dockerignore" ".php-cs-fixer.dist.php" "LICENSE.md" "phpstan.neon.dist" "README.md")
+KEEP=(".git" ".devcontainer.json" ".github" ".shelf" "docker" ".dockerignore" ".php-cs-fixer.dist.php" "LICENSE.md" "phpstan.neon.dist" "README.md")
 
 # Convert the keep array to a pattern for the find command
 KEEP_PATTERN=$(printf " -name %s -o" "${KEEP[@]}")

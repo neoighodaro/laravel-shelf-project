@@ -2,7 +2,7 @@
 
 This is a template for a Laravel project. You can use it to create a new Laravel project. It is useful if you don't have PHP or composer installed on your machine and you still want to use Laravel.
 
-The project contains a Docker image that you can use to run your Laravel project. It is based on [dunglas/frankenphp](https://github.com/dunglas/frankenphp). It also contains a `devcontainer.json` file that you can use to create a new VS Code development environment.
+The project contains a Docker image that you can use to run your Laravel project. It is based on [dunglas/frankenphp](https://github.com/dunglas/frankenphp). It also contains a `.devcontainer.json` file that you can use to create a new VS Code development environment.
 
 ## Requirements
 - [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed on your machine
