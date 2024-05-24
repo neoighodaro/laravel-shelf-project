@@ -95,7 +95,7 @@ FORWARD_REDIS_PORT=$FORWARD_REDIS_PORT
 #-------------------------------------------------------------------------------
 # Default Environment
 #-------------------------------------------------------------------------------
-" | cat - laravel/.env > temp && mv temp laravel/.env
+" | cat - laravel/.env.example > temp && mv temp laravel/.env.example
 
 uncomment_line 'DB_PORT=3306'
 uncomment_line 'DB_HOST=127.0.0.1'
