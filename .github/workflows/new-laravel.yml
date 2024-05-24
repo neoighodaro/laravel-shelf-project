@@ -40,7 +40,7 @@ jobs:
 
       # If Laravel is not detected, exit action
       - name: Exit if not Laravel
-        if: steps.laravel.outputs.laravel != 'true'
+        if: steps.laravel.outputs.laravel == 'true'
         run: |
           echo "This action only works when the repository does not contain a composer.json file."
           exit 1
