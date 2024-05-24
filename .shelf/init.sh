@@ -22,19 +22,19 @@ function replace_in_file() {
 }
 
 function get_env_value() {
-    echo $(grep $1 laravel/.env.example | cut -d '=' -f2)
+    echo $(grep $1 laravel/.env | cut -d '=' -f2)
 }
 
 function set_env_value() {
-    sed -i "s/^$1=.*$/$1=$2/" "laravel/.env.example"
+    sed -i "s/^$1=.*$/$1=$2/" "laravel/.env"
 }
 
 function uncomment_line() {
-    sed -i "s/^#.*$1/$1/" "laravel/.env.example"
+    sed -i "s/^#.*$1/$1/" "laravel/.env"
 }
 
 function comment_line() {
-    sed -i "s/^$1/# $1/" "laravel/.env.example"
+    sed -i "s/^$1/# $1/" "laravel/.env"
 }
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -95,7 +95,7 @@ FORWARD_REDIS_PORT=$FORWARD_REDIS_PORT
 #-------------------------------------------------------------------------------
 # Default Environment
 #-------------------------------------------------------------------------------
-" | cat - laravel/.env.example > temp && mv temp laravel/.env.example
+" | cat - laravel/.env > temp && mv temp laravel/.env
 
 uncomment_line 'DB_PORT=3306'
 uncomment_line 'DB_HOST=127.0.0.1'
@@ -112,6 +112,9 @@ set_env_value 'DB_USERNAME' "laravel"
 set_env_value 'DB_PASSWORD' "secret"
 set_env_value 'REDIS_PORT' "\${FORWARD_REDIS_PORT}"
 set_env_value 'REDIS_HOST' 'redis'
+
+rm laravel/.env.example
+mv laravel/.env laravel/.env.example
 
 ################################
 # Prepare docker-compose.yml
