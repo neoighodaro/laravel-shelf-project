@@ -7,7 +7,7 @@
 FRANKENPHP_VERSION=${FRANKENPHP_VERSION:-8.3-bookworm}
 DB_CONNECTION=${DB_CONNECTION:-pgsql}
 PROJECT_NAME=${PROJECT_NAME:-'Shelf Project'}
-SLUGIFIED_PROJECT_NAME=$(echo $PROJECT_NAME | sed 's/\([^A-Z]\)\([A-Z0-9]\)/\1-\2/g' | sed 's/\([A-Z0-9]\)\([A-Z0-9]\)\([^A-Z]\)/\1-\2\3/g' | tr '[:upper:]' '[:lower:]')
+SLUGIFIED_PROJECT_NAME=$(echo $PROJECT_NAME | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 
 APP_PORT=${APP_PORT:-8080}
 FORWARD_DB_PORT=${FORWARD_DB_PORT:-5432}
