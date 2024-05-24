@@ -56,8 +56,8 @@ RUN \
     chown -R ${USER}:${USER} ${ROOT} /var/log; \
     chmod -R a+rw /var/log;
 
-COPY --chmod=755 etc/bash_aliases /etc/aliases
-COPY --chmod=755 etc/start-container.sh /usr/local/bin/start-container
+COPY --chmod=755 docker/etc/bash_aliases /etc/aliases
+COPY --chmod=755 docker/etc/start-container.sh /usr/local/bin/start-container
 COPY --chown=${USER}:${USER} supervisor/conf.d/supervisord.*.conf /etc/supervisor/conf.d/
 
 EXPOSE 80
