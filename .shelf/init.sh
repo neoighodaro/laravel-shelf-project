@@ -72,8 +72,12 @@ composer create-project --prefer-dist laravel/laravel laravel --no-progress --no
 
 cd laravel
 composer require ext-gd ext-intl ext-mbstring ext-pdo_pgsql ext-pdo_sqlite ext-redis ext-zend-opcache
-composer require --dev friendsofphp/php-cs-fixer
-composer remove --dev laravel/sail
+composer require --dev friendsofphp/php-cs-fixer larastan/larastan
+composer remove --dev laravel/sail phpunit/phpunit
+composer require pestphp/pest pestphp/pest-plugin-drift pestphp/pest-plugin-laravel --dev --with-all-dependencies
+echo no | ./vendor/bin/pest --init
+./vendor/bin/pest --drift
+composer remove --dev pestphp/pest-plugin-drift
 cd ..
 
 if [ -f "compose.yaml" ]; then
