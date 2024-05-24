@@ -64,7 +64,7 @@ jobs:
       # Create new Laravel project
       - name: Create new Laravel project
         run: |
-          FRANKENPHP_VERSION=${{ inputs.frankenphp_version }} PROJECT_NAME=${{ inputs.project_name }} ./.shelf/init.sh
+          FRANKENPHP_VERSION="${{ inputs.frankenphp_version }}" PROJECT_NAME="${{ inputs.project_name }}" ./.shelf/init.sh
 
       # Setup Git
       - name: "Set up Git"
