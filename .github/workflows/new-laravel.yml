@@ -1,0 +1,79 @@
+name: Build new Laravel project
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_name:
+        description: 'Project Name'
+        required: true
+        default: 'Shelf Project'
+      frankenphp_version:
+        description: 'FrankenPHP Version'
+        required: true
+        default: '8.3-bookworm'
+        options:
+          - '8.3-bookworm'
+          - '8.2'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build:
+    name: build ${{ inputs.project_name }}
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Detect Laravel
+      - name: Detect Laravel
+        id: laravel
+        run: |
+          if [ -f "composer.json" ]; then
+            echo "laravel=true" >> $GITHUB_OUTPUT
+          else
+            echo "laravel=false" >> $GITHUB_OUTPUT
+          fi
+
+      # If Laravel is not detected, exit action
+      - name: Exit if not Laravel
+        if: steps.laravel.outputs.laravel != 'true'
+        run: |
+          echo "This action only works when the repository does not contain a composer.json file."
+          exit 1
+
+      # Setup PHP
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+          extensions: mbstring, intl, bcmath, fileinfo, openssl, pdo, pdo_sqlite, sqlite3
+          ini-values: memory_limit=-1
+
+      # Cache Composer dependencies
+      - id: cache-composer-deps
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-dependencies
+
+      # Create new Laravel project
+      - name: Create new Laravel project
+        run: |
+          FRANKENPHP_VERSION=${{ inputs.frankenphp_version }} PROJECT_NAME=${{ inputs.project_name }} ./.shelf/init.sh
+
+      # Setup Git
+      - name: "Set up Git"
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+      # Commit changes and push
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Create new Laravel project"
+          git push origin main

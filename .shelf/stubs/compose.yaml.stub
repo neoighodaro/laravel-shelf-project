@@ -1,0 +1,98 @@
+name: [%SLUGIFIED_PROJECT_NAME%]
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Networks
+# ------------------------------------------------------------------------------------------------------------------------
+
+networks:
+  [%SLUGIFIED_PROJECT_NAME%]:
+    driver: bridge
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Volumes
+# ------------------------------------------------------------------------------------------------------------------------
+
+volumes:
+  [%SLUGIFIED_PROJECT_NAME%]-pgsql:
+    driver: local
+  [%SLUGIFIED_PROJECT_NAME%]-redis:
+    driver: local
+
+# ------------------------------------------------------------------------------------------------------------------------
+# Services
+# ------------------------------------------------------------------------------------------------------------------------
+
+services:
+  app:
+    build:
+      target: dev
+      context: .
+      dockerfile: docker/Dockerfile
+    image: [%SLUGIFIED_PROJECT_NAME%]:dev-latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      PHP_FPM_POOL_NAME: "[%SLUGIFIED_PROJECT_NAME%]_app"
+      APP_URL: "${APP_URL:-http://localhost}"
+      APP_ENV: "${APP_ENV:-local}"
+      WITH_HORIZON: "true"
+      WITH_SCHEDULER: "true"
+    ports:
+      - "${APP_PORT:-8080}:80"
+    volumes:
+      - ".:/var/www/html:cached"
+    networks:
+      - [%SLUGIFIED_PROJECT_NAME%]
+    depends_on:
+      pgsql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/up"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
+  pgsql:
+    image: "postgres:15.1"
+    ports:
+      - "${FORWARD_DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_DB: "${DB_DATABASE:-[%SLUGIFIED_PROJECT_NAME%]}"
+      POSTGRES_USER: "${DB_USERNAME:-laravel}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD:-laravel}"
+      PGPASSWORD: "${DB_PASSWORD:-secret}"
+    volumes:
+      - "./docker/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql"
+      - "[%SLUGIFIED_PROJECT_NAME%]-pgsql:/var/lib/postgresql/data"
+    networks:
+      - [%SLUGIFIED_PROJECT_NAME%]
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "pg_isready",
+          "-q",
+          "-d",
+          "${DB_DATABASE:-[%SLUGIFIED_PROJECT_NAME%]}",
+          "-U",
+          "${DB_USERNAME:-laravel}",
+        ]
+      interval: 1s
+      retries: 5
+      timeout: 5s
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "${FORWARD_REDIS_PORT:-6379}:6379"
+    volumes:
+      - "[%SLUGIFIED_PROJECT_NAME%]-redis:/data"
+    networks:
+      - [%SLUGIFIED_PROJECT_NAME%]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      retries: 5
+      timeout: 5s

@@ -1,0 +1,140 @@
+{
+    "name": "shelf-project",
+    "dockerComposeFile": ["../compose.yaml"],
+    "service": "app",
+    "remoteUser": "octane",
+    "workspaceFolder": "/var/www/html",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "IronGeek.vscode-env",
+                "amiralizadeh9480.laravel-extra-intellisense",
+                "ryannaddy.laravel-artisan",
+                "onecentlin.laravel-blade",
+                "Gruntfuggly.todo-tree",
+                "MehediDracula.php-namespace-resolver",
+                "bmewburn.vscode-intelephense-client",
+                "xdebug.php-debug",
+                "junstyle.php-cs-fixer",
+                "esbenp.prettier-vscode",
+                "patbenatar.advanced-new-file",
+                "GitHub.copilot",
+                "georgykurian.laravel-ide-helper",
+                "sleistner.vscode-fileutils",
+                "m1guelpf.better-pest",
+                "bradlc.vscode-tailwindcss"
+            ],
+            "settings": {
+                // Debugging
+                "debug.openDebug": "openOnDebugBreak",
+                // Formatting & Prettier
+                "editor.defaultFormatter": "esbenp.prettier-vscode",
+                "prettier.requireConfig": true,
+                "prettier.useEditorConfig": true,
+                "prettier.bracketSameLine": true,
+                // Files
+                "files.autoSave": "onFocusChange",
+                "files.eol": "\n",
+                "files.insertFinalNewline": true,
+                "files.trimFinalNewlines": true,
+                "files.trimTrailingWhitespace": true,
+                "files.watcherExclude": {
+                    "**/.git/objects/**": true,
+                    "**/.git/subtree-cache/**": true,
+                    "**/node_modules/**": true,
+                    "**/env/**": true,
+                    "**/venv/**": true,
+                    "env-*": true
+                },
+                "files.associations": {
+                    ".php_cs": "php",
+                    ".php_cs.dist": "php",
+                    "*.yml": "yaml",
+                    ".env": "env",
+                    ".env.example": "env",
+                    ".env.local": "env",
+                    "*.plist": "properties"
+                },
+                // Todo Plugin
+                "todo-tree.general.debug": true,
+                "todo-tree.highlights.defaultHighlight": {
+                    "gutterIcon": true
+                },
+                "todo-tree.highlights.customHighlight": {
+                    "TODO": {
+                        "foreground": "#92400d",
+                        "background": "#fef3c7",
+                        "iconColour": "#fef3c7",
+                        "type": "tag",
+                        "icon": "zap"
+                    },
+                    "FIXME": {
+                        "foreground": "#fff",
+                        "background": "#f06292",
+                        "icon": "flame",
+                        "type": "line",
+                        "iconColour": "#f06292"
+                    }
+                },
+                // Search filter
+                "search.useIgnoreFiles": true,
+                "search.exclude": {
+                    "**/vendor/{[^l],?[^a]}*": true, // Hide everything in /vendor, except the "laravel"
+                    "**/public/{[^i],?[^n]}*": true, // Hide everything in /public, except "index.php"
+                    "**/node_modules": true,
+                    "**/dist": true,
+                    "**/_ide_helper.php": true,
+                    "**/composer.lock": true,
+                    "**/package-lock.json": true,
+                    "**/storage": true,
+                    ".phpunit.result.cache": true
+                },
+                // PHP
+                "php.suggest.basic": false,
+                "intelephense.environment.phpVersion": "8.2.0",
+                // PHP: CS Fixer
+                "php-cs-fixer.onsave": true,
+                "php-cs-fixer.autoFixByBracket": false,
+                "php.validate.enable": true,
+                "php-cs-fixer.rules": "@PSR2",
+                "php-cs-fixer.config": ".php-cs-fixer.php;.php-cs-fixer.dist.php;.php_cs;.php_cs.dist",
+                "php-cs-fixer.executablePath": "/var/www/html/vendor/bin/php-cs-fixer",
+                "php-cs-fixer.lastDownload": 1626619725701,
+                // Laravel
+                "blade.format.enable": true,
+                "helper.models": false,
+                // Language Specific Settings
+                "[blade]": {
+                    "editor.autoClosingBrackets": "always",
+                    "editor.formatOnSave": true,
+                    "editor.tabSize": 2,
+                    "editor.defaultFormatter": "onecentlin.laravel-blade"
+                },
+                "[env]": {
+                    "workbench.editor.languageDetection": false
+                },
+                "[json]": {
+                    "editor.formatOnSave": true,
+                    "editor.hover.enabled": true,
+                    "editor.tabSize": 2
+                },
+                "[jsonc]": {
+                    "editor.formatOnSave": true,
+                    "editor.hover.enabled": true,
+                    "editor.tabSize": 2
+                },
+                "[php]": {
+                    "editor.defaultFormatter": "junstyle.php-cs-fixer",
+                    "editor.formatOnPaste": true,
+                    "editor.formatOnSave": true,
+                    "editor.rulers": [
+                        {
+                            "column": 120,
+                            "color": "#3a415e"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

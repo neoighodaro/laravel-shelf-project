@@ -1,0 +1,6 @@
+alias ll='ls -la'
+alias a='php artisan'
+alias t='php artisan test'
+alias mi='php artisan migrate'
+alias mif='php artisan migrate:fresh'
+alias phpstan='vendor/bin/phpstan analyse --memory-limit=2G'

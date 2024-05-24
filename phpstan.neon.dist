@@ -1,0 +1,11 @@
+parameters:
+    ignoreErrors:
+        - '#Call to an undefined method Pest\\Expectation<(.*)>::(.*)\(\).#'
+    scanFiles:
+        - tests/Pest.php
+    paths:
+        - app/
+    level: 8
+    checkOctaneCompatibility: true
+    excludePaths:
+            - tests/*
