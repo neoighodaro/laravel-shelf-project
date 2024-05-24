@@ -11,6 +11,7 @@ on:
         description: 'FrankenPHP Version'
         required: true
         default: '8.3-bookworm'
+        type: choice
         options:
           - '8.3-bookworm'
           - '8.2'
