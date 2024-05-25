@@ -70,6 +70,13 @@ ENTRYPOINT ["start-container"]
 
 FROM base as dev
 
+RUN \
+    apt-get update; \
+    apt-get upgrade -yqq; \
+    apt-get install -yqq --no-install-recommends --show-progress git; \
+    apt-get clean; \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*;
+
 RUN install-php-extensions xdebug; \
     cat /etc/aliases >> /home/${USER}/.bashrc;
 
