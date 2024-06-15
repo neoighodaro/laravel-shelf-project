@@ -112,10 +112,10 @@ set_env_value 'APP_NAME' "\"$PROJECT_NAME\""
 set_env_value 'APP_URL' "http\:\/\/localhost:\${APP_PORT}"
 set_env_value 'DB_CONNECTION' "$DB_CONNECTION"
 set_env_value 'DB_HOST' 'pgsql'
-set_env_value 'DB_PORT' "\${FORWARD_DB_PORT}"
+#set_env_value 'DB_PORT' "\${FORWARD_DB_PORT}"
 set_env_value 'DB_USERNAME' "laravel"
 set_env_value 'DB_PASSWORD' "secret"
-set_env_value 'REDIS_PORT' "\${FORWARD_REDIS_PORT}"
+#set_env_value 'REDIS_PORT' "\${FORWARD_REDIS_PORT}"
 set_env_value 'REDIS_HOST' 'redis'
 
 rm laravel/.env.example
